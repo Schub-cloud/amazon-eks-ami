@@ -118,6 +118,22 @@
     },
     {
       "type": "shell",
+      "remote_folder":"{{ user `remote_folder`}}",
+      "inline":[
+        "echo Installing Wireguard...",
+        "echo Adding Wireguard repo",
+        "sudo curl -Lo /etc/yum.repos.d/wireguard.repo https://copr.fedorainfracloud.org/coprs/jdoss/wireguard/repo/epel-7/jdoss-wireguard-epel-7.repo",
+        "echo Installing epel",
+        "sudo amazon-linux-extras install epel -y",
+        "echo Install wireguard",
+        "sudo yum -y install wireguard-dkms wireguard-tools",
+        "echo Updating system",
+        "sudo yum -y update",
+        "echo Wireguard installation done."
+      ]
+    },
+    {
+      "type": "shell",
       "remote_folder": "{{ user `remote_folder`}}",
       "expect_disconnect": true,
       "script": "{{template_dir}}/scripts/upgrade_kernel.sh",
